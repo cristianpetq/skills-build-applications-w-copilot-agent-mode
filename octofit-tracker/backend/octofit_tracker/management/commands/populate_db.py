@@ -19,15 +19,15 @@ class Command(BaseCommand):
         team2.members.add(user2)
 
         # Create test activities
-        Activity.objects.create(user=user1, activity_type='Running', duration=30, date='2025-04-10')
-        Activity.objects.create(user=user2, activity_type='Cycling', duration=45, date='2025-04-10')
+        activity1 = Activity.objects.create(name='Running', description='Morning run in the park', duration=30, user=user1)
+        activity2 = Activity.objects.create(name='Cycling', description='Evening cycling session', duration=45, user=user2)
 
-        # Create test leaderboard entries
-        Leaderboard.objects.create(team=team1, score=100)
-        Leaderboard.objects.create(team=team2, score=150)
+        # Create test leaderboards
+        leaderboard1 = Leaderboard.objects.create(name='Weekly Challenge')
+        leaderboard1.activities.add(activity1, activity2)
 
         # Create test workouts
-        Workout.objects.create(name='Morning Run', description='A quick morning run', duration=30)
-        Workout.objects.create(name='Evening Yoga', description='Relaxing yoga session', duration=60)
+        workout1 = Workout.objects.create(name='Cardio Blast', description='High-intensity cardio workout', duration=60)
+        workout2 = Workout.objects.create(name='Strength Training', description='Full-body strength training', duration=50)
 
-        self.stdout.write(self.style.SUCCESS('Successfully populated the database with test data'))
+        self.stdout.write(self.style.SUCCESS('Test data successfully added to the database.'))
